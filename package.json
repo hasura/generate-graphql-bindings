@@ -1,0 +1,20 @@
+{
+  "name": "generate-graphql-binding",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-link-http": "^1.5.4",
+    "fs": "0.0.1-security",
+    "graphql": "^0.13.2",
+    "graphql-binding": "^2.1.1",
+    "graphql-tools": "^3.0.5",
+    "node-fetch": "^2.1.2"
+  }
+}

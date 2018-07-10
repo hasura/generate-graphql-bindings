@@ -1,0 +1,287 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+}
+
+# columns and relationships of "address"
+type address {
+  address: String
+  id: Int
+
+  # An object relationship
+  user: profile
+  user_id: Int
+}
+
+# Boolean expression to filter rows from the table "address". All fields are combined with a logical 'AND'.
+input address_bool_exp {
+  _and: [address_bool_exp]
+  _not: address_bool_exp
+  _or: [address_bool_exp]
+  address: text_comparison_exp
+  id: integer_comparison_exp
+  user: profile_bool_exp
+  user_id: integer_comparison_exp
+}
+
+# input type for inserting data into table "address"
+input address_insert_input {
+  address: String
+  id: Int
+  user_id: Int
+}
+
+# response of any mutation on the table "address"
+type address_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [address_no_rels!]!
+}
+
+# only postgres columns (no relationships) from "address"
+type address_no_rels {
+  address: String
+  id: Int
+  user_id: Int
+}
+
+# ordering options when selecting data from "address"
+enum address_order_by {
+  # in the ascending order of "address", nulls last
+  address_asc
+
+  # in the ascending order of "address", nulls first
+  address_asc_nulls_first
+
+  # in the descending order of "address", nulls last
+  address_desc
+
+  # in the descending order of "address", nulls first
+  address_desc_nulls_first
+
+  # in the ascending order of "id", nulls last
+  id_asc
+
+  # in the ascending order of "id", nulls first
+  id_asc_nulls_first
+
+  # in the descending order of "id", nulls last
+  id_desc
+
+  # in the descending order of "id", nulls first
+  id_desc_nulls_first
+
+  # in the ascending order of "user_id", nulls last
+  user_id_asc
+
+  # in the ascending order of "user_id", nulls first
+  user_id_asc_nulls_first
+
+  # in the descending order of "user_id", nulls last
+  user_id_desc
+
+  # in the descending order of "user_id", nulls first
+  user_id_desc_nulls_first
+}
+
+# input type for updating data in table "address"
+input address_set_input {
+  address: String
+  id: Int
+  user_id: Int
+}
+
+# expression to compare columns of type integer. All fields are combined with logical 'AND'.
+input integer_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int]
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int]
+}
+
+# mutation root
+type mutation_root {
+  # delete data from the table: "address"
+  delete_address(
+    # filter the rows which have to be deleted
+    where: address_bool_exp!
+  ): address_mutation_response
+
+  # delete data from the table: "profile"
+  delete_profile(
+    # filter the rows which have to be deleted
+    where: profile_bool_exp!
+  ): profile_mutation_response
+
+  # insert data into the table: "address"
+  insert_address(
+    # the rows to be inserted
+    objects: [address_insert_input!]!
+  ): address_mutation_response
+
+  # insert data into the table: "profile"
+  insert_profile(
+    # the rows to be inserted
+    objects: [profile_insert_input!]!
+  ): profile_mutation_response
+
+  # update data of the table: "address"
+  update_address(
+    # sets the columns of the filtered rows to the given values
+    _set: address_set_input!
+
+    # filter the rows which have to be updated
+    where: address_bool_exp!
+  ): address_mutation_response
+
+  # update data of the table: "profile"
+  update_profile(
+    # sets the columns of the filtered rows to the given values
+    _set: profile_set_input!
+
+    # filter the rows which have to be updated
+    where: profile_bool_exp!
+  ): profile_mutation_response
+}
+
+# columns and relationships of "profile"
+type profile {
+  # An array relationship
+  addresses(
+    # limit the nuber of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [address_order_by!]
+
+    # filter the rows returned
+    where: address_bool_exp
+  ): [address!]!
+  id: Int
+  name: String
+}
+
+# Boolean expression to filter rows from the table "profile". All fields are combined with a logical 'AND'.
+input profile_bool_exp {
+  _and: [profile_bool_exp]
+  _not: profile_bool_exp
+  _or: [profile_bool_exp]
+  addresses: address_bool_exp
+  id: integer_comparison_exp
+  name: text_comparison_exp
+}
+
+# input type for inserting data into table "profile"
+input profile_insert_input {
+  id: Int
+  name: String
+}
+
+# response of any mutation on the table "profile"
+type profile_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [profile_no_rels!]!
+}
+
+# only postgres columns (no relationships) from "profile"
+type profile_no_rels {
+  id: Int
+  name: String
+}
+
+# ordering options when selecting data from "profile"
+enum profile_order_by {
+  # in the ascending order of "id", nulls last
+  id_asc
+
+  # in the ascending order of "id", nulls first
+  id_asc_nulls_first
+
+  # in the descending order of "id", nulls last
+  id_desc
+
+  # in the descending order of "id", nulls first
+  id_desc_nulls_first
+
+  # in the ascending order of "name", nulls last
+  name_asc
+
+  # in the ascending order of "name", nulls first
+  name_asc_nulls_first
+
+  # in the descending order of "name", nulls last
+  name_desc
+
+  # in the descending order of "name", nulls first
+  name_desc_nulls_first
+}
+
+# input type for updating data in table "profile"
+input profile_set_input {
+  id: Int
+  name: String
+}
+
+# query root
+type query_root {
+  # fetch data from the table: "address"
+  address(
+    # limit the nuber of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [address_order_by!]
+
+    # filter the rows returned
+    where: address_bool_exp
+  ): [address!]!
+
+  # fetch data from the table: "profile"
+  profile(
+    # limit the nuber of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [profile_order_by!]
+
+    # filter the rows returned
+    where: profile_bool_exp
+  ): [profile!]!
+}
+
+# expression to compare columns of type text. All fields are combined with logical 'AND'.
+input text_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String]
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
