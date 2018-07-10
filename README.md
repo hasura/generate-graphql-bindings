@@ -2,7 +2,7 @@
 
 This repo shows how to generate [graphql-bindings](https://github.com/graphql-binding/graphql-binding) for Hasura GraphQL Engine generated APIs.
 
-## Config
+## Configuration
 
 1. Clone the repo and `cd` into it.
 
@@ -15,9 +15,9 @@ This repo shows how to generate [graphql-bindings](https://github.com/graphql-bi
    ```bash
    $ npm install -g get-graphql-schema
    $ get-graphql-schema GRAPHQL_URL > schema.graphql
-   
+
    # replace GRAPHQL_URL with your GraphQL URL such as `https://test.herokuapp.com/v1alpha1/graphql`
-   ``` 
+   ```
 
    If you have set an ACCESS_KEY for the GraphQL engine, you need to pass a header while generating the schema.
 
