@@ -28,6 +28,15 @@ This repo shows how to generate [graphql-bindings](https://github.com/graphql-bi
    // replace 'http://tanmai .....' with your GraphQL engine URL
    const graphqlEndpoint = 'http://tanmai-graphql2.herokuapp.com/v1alpha1/graphql';
    ```
+  
+4. You can export this binding and start using it. For example:
+
+   ```
+   import HasuraBinding from './bindigs/';
+   
+   const newBinding = new HasuraBinding();
+   newBinding.query.article(args, '{ id, title, content }').then((response) => console.log(response));
+   ```
 
 ## Usage
 
