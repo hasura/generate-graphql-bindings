@@ -31,7 +31,7 @@ This repo shows how to generate [graphql-bindings](https://github.com/graphql-bi
   
 4. You can export this binding and start using it. For example:
 
-   ```
+   ```js
    import HasuraBinding from './bindigs/';
    
    const newBinding = new HasuraBinding();
